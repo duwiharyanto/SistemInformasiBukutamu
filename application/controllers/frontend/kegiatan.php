@@ -12,8 +12,8 @@ class kegiatan extends Master {
 		// }
 	}
 	//VARIABEL
-	private $master_tabel="user"; //Mendefinisikan Nama Tabel
-	private $id="user_id";	//Menedefinisaikan Nama Id Tabel
+	private $master_tabel="kegiatan"; //Mendefinisikan Nama Tabel
+	private $id="kegiatan_id";	//Menedefinisaikan Nama Id Tabel
 	private $default_url="frontend/kegiatan/"; //Mendefinisikan url controller
 	private $default_view="frontend/kegiatan/"; //Mendefinisiakn defaul view
 	private $view="template/webfrontend"; //Mendefinisikan Tamplate Root
@@ -73,7 +73,7 @@ class kegiatan extends Master {
 	}
 	public function tabel(){
 		$global_set=array(
-			'headline'=>false,
+			'headline'=>'kegiatan',
 			'url'=>$this->default_url,
 		);
 		//LOAD FUNCTION GLOBAL SET
@@ -85,9 +85,13 @@ class kegiatan extends Master {
 		$data=array(
 			'global'=>$global,
 			'data'=>$this->Crud->read($query)->result(),
+			'tes'=>'dwadwa',
 		);
 		//$this->viewdata($data);
+		//print_r(json_encode($data));
+		//return $this->output->set_output(json_encode($data));
 		$this->load->view($this->default_view.'tabel',$data);		
+		//$this->output->set_content_type('aplication/json')->set_output(json_encode($data));_
 	}
 	public function edit(){
 		$global_set=array(
