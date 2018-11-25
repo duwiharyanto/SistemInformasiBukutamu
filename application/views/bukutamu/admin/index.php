@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12">
-		<h4 style="border-left: 5px solid #245571; padding-left: 10px">CRUD dengan AJAX</h4>
+		<h4 style="border-left: 5px solid #245571; padding-left: 10px">Pastikan kegiatan yang dipilih sudah diaktifkan</h4>
 	</div>
 </div>
 <div id="view">

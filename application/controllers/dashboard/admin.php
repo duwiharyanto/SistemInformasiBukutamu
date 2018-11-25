@@ -3,20 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //include controller master 
 include APPPATH.'controllers/Master.php';
 
-class kegiatan extends Master {
+class admin extends Master {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Crud');
 		// if(($this->session->userdata('login')!=true) || ($this->session->userdata('level')!=1) ){
 		// 	redirect(site_url('login/logout'));
 		// }
+		$this->cekadmin();
 	}
 	//VARIABEL
 	private $master_tabel="kegiatan"; //Mendefinisikan Nama Tabel
 	private $id="kegiatan_id";	//Menedefinisaikan Nama Id Tabel
 	private $default_url="frontend/kegiatan/"; //Mendefinisikan url controller
 	private $default_view="frontend/kegiatan/"; //Mendefinisiakn defaul view
-	private $view="template/webfrontend"; //Mendefinisikan Tamplate Root
+	private $view="template/backend"; //Mendefinisikan Tamplate Root
 	private $path='./upload/';
 
 	private function global_set($data){
@@ -31,6 +32,7 @@ class kegiatan extends Master {
 			'cetak'=>false,
 			'edit'=>true,
 			'delete'=>true,
+			'download'=>false,
 		);
 		return (object)$data; //MEMBUAT ARRAY DALAM BENTUK OBYEK
 		//$data->menu=kegiatan, bentuk obyek
@@ -87,7 +89,7 @@ class kegiatan extends Master {
 		}else{
 			$data=array(
 				'global'=>$global,
-				'menu'=>$this->menu(0),
+				'menu'=>$this->menu_backend($this->session->userdata('user_level')),
 			);
 			//$this->viewdata($data);			
 			$this->load->view($this->view,$data);
@@ -151,7 +153,7 @@ class kegiatan extends Master {
 			}else{
 				$dt['error']='input data error';
 			}
-			return $this->output->set_content_type('aplication/json')->set_output(json_encode($dt));			
+			return $this->output->set_output(json_encode($dt));			
 		}else{
 			$query=array(
 				'tabel'=>$this->master_tabel,

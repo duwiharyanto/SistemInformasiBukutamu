@@ -93,7 +93,7 @@
                     title: '<strong>Informasi</strong>',
                     message: '<?= $this->session->flashdata('success')?>'
                   },{
-                    type: 'info'
+                    type: 'success'
                   });
               </script>       
             <?php elseif($this->session->flashdata('error')):?>

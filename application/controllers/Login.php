@@ -1,6 +1,6 @@
 <?php
-
-	class Login extends CI_Controller
+include APPPATH.'controllers/Master.php';
+	class Login extends Master
 	{
 		
 		function __construct(){
@@ -11,11 +11,7 @@
 		private $id='id';
 
 		function index(){
-			if($this->session->userdata('login')==true AND $this->session->userdata('level')==1 ){
-				redirect(site_url('admin/dashboard'));
-			}elseif($this->session->userdata('login')==true AND $this->session->userdata('level')!=1 ){
-				redirect(site_url('user/dashboard'));
-			}
+			$this->ceklogin();
 			$this->load->view('template/login');
 			//redirect(site_url('crud/admin'));
 		}

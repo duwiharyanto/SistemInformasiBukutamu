@@ -86,8 +86,8 @@
         },
         error:function(){
             $.notify({
-              title: '<strong>Perhatian </strong>',
-              message: 'Fatal Error, Contact Admin',
+              title: '<strong class="fa fa-warning"></strong>',
+              message: 'Fatal Error, Please Contact Admin',
               },{
               type: 'danger'
             });  
@@ -137,7 +137,16 @@
             }
             loaddata();
             console.log(data.success);
-          }
+          },
+        error:function(){
+            $.notify({
+              title: '<strong class="fa fa-warning"></strong>',
+              message: 'Fatal Error, Please Contact Admin',
+              },{
+              type: 'danger'
+            });  
+            console.log(data.upload);        
+        }          
         })
       });
       return false

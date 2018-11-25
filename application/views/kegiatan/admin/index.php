@@ -1,22 +1,20 @@
-<div id="view">
-	<div class="row">
-		<div class="col-sm-2">
-			<div class="form-group">
-				<button onclick="add();" id="add" url="<?= base_url($global->url.'add')?>" class="btn btn-flat btn-block btn-primary"><span class="fa fa-plus"></span> Tambah</button>
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<div id="tabel" url="<?= base_url($global->url.'tabel')?>">
-				<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Loading data. Please wait...</div>
-			</div>
-		</div>
+<div class="row">
+	<div class="col-sm-12">
+		<h4 style="border-left: 5px solid #245571; padding-left: 10px">CRUD dengan AJAX</h4>
 	</div>
 </div>
-<?php include 'action.js';?>
+<div id="view">
+	<div id="tabel" url="<?= base_url($global->url.'tabel')?>">
+		<div class="text-center"><i class="fa fa-refresh fa-spin"></i> Loading data. Please wait...</div>
+	</div>
+</div>
 <script type="text/javascript">
-	    setTimeout(function () {
-        var url=$('#tabel').attr('url');
-        $("#tabel").load(url);
-        //alert(url);
-    }, 200); 
+	$(document).ready(function(){
+		var url=$('#tabel').attr('url');
+		    setTimeout(function () {
+	        $("#tabel").load(url);
+	        //alert(url);
+	    }, 200); 		
+	})	
 </script>
+<?php include 'action.php';?>

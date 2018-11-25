@@ -31,7 +31,7 @@
   <script src="<?= base_url();?>asset/dist/js/jquery.validate.js"></script>
   <script src="<?= base_url();?>asset/plugins/bootstrap-notify/bootstrap-notify.js"></script>
 </head>
-<body class="hold-transition sidebar-collapse skin-green sidebar-mini">
+<body class="hold-transition sidebar-collapse skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 <!--================================HEADER================================-->
@@ -128,7 +128,7 @@
         <?php echo ucwords($global->headline)?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?= site_url('login')?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><a href="<?= site_url($global->url)?>"><?= ucwords($global->headline)?></a></li>
       </ol>
     </section>

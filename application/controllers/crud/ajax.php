@@ -135,9 +135,9 @@ class kegiatan extends Master {
 				}else{
 					//$this->session->set_flashdata('error',$this->upload->display_errors());
 					//redirect(site_url($this->default_url));
-					$dt['error']=$this->upload->display_errors();
-					return $this->output->set_output(json_encode($dt));
-					exit();	
+					$dt['upload']=$this->upload->display_errors();
+					//return $this->output->set_output(json_encode($dt));
+					//exit();	
 				}
 			}			
 			$query=array(

@@ -16,6 +16,17 @@
     var url=$("#add").attr('url');   
     $("#view").load(url);      
   }
+  function isibukutamu(id){
+      var url=$("#add").attr('url');
+      $.ajax({
+        type:'POST',
+        url:url,
+        data:{id:id},
+        success:function(data){
+          $("#view").html(data);       
+        }
+      })
+  }
   function edit(){   
     $('.edit').click(function(){
       var url=$(this).attr('url');
