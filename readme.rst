@@ -1,10 +1,12 @@
+
 ###################
 Informasi
 ###################
 
-Program : Master CRUD
+Program : BUKUTAMU
 Programer : haryanto.duwi@gmail.com
 Data Base : mysql
+Framework : Codeigniter 3.1.8
 
 ###################
 What is CodeIgniter
