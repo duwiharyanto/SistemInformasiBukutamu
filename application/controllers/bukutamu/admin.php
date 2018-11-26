@@ -30,7 +30,7 @@ class admin extends Master {
 			'view'=>"views/bukutamu/admin/index.php",
 			'detail'=>false,
 			'cetak'=>false,
-			'edit'=>true,
+			'edit'=>false,
 			'delete'=>true,
 			'download'=>false,
 		);
@@ -193,7 +193,7 @@ class admin extends Master {
 	}	
 	public function hapus(){
 		$id=$this->input->post('id');
-		$this->hapus_file($id);
+		//$this->hapus_file($id);
 		$query=array(
 			'tabel'=>$this->master_tabel,
 			'where'=>array($this->id=>$id),
