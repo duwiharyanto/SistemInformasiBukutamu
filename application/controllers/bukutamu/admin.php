@@ -207,8 +207,13 @@ class admin extends Master {
 		}
 		return $this->output->set_output(json_encode($dt));	
 	}
-	public function download($file){
-		$this->downloadfile($this->path,$file);
+	public function download($file=null){
+		if($file){
+			$this->downloadfile($this->path,$file);
+		}else{
+			$this->session->set_flashdata('error','File tidak ditemukan');
+			redirect(site_url($this->default_url));
+		}
 	}
 
 }

@@ -32,6 +32,36 @@
       return false;        
     })
   }
+  function aktifasi(id){
+    url=$(".aktifasi").attr('url');
+    $.ajax({
+      type:'POST',
+      url:url,
+      data:{id:id},
+      encode:true,
+      dataType:'json',
+      success:function(data){
+        if(data.success){
+          $.notify({
+            title: '<strong class="fa fa-check"></strong>',
+            message: data.success,
+            },{
+            type: 'success'
+          });         
+        }else{
+          $.notify({
+            title: '<strong class="fa fa-warning"></strong>',
+            message: data.error,
+            },{
+            type: 'danger'
+          });         
+        }
+        loaddata();
+        console.log(data);
+      }
+    })    
+    //alert(id);
+  }
   function validasi(){
     $("form").validate({
     errorPlacement: function ( error, element ) {
@@ -136,7 +166,7 @@
               });         
             }
             loaddata();
-            console.log(data.success);
+            console.log(data);
           }
         })
       });

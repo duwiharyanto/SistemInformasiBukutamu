@@ -52,7 +52,9 @@ class Crud extends CI_Model
 		}
 	}
 	public function update($data){
-		$this->db->where($data['where']);
+		if(isset($data['where'])){
+			$this->db->where($data['where']);
+		}
 		if($this->db->update($data['tabel'],$data['data'])){
 			return true;
 		}else{

@@ -20,7 +20,7 @@
 					</tr>	
 					<tr>
 						<th>Berkas Pendukung</th>
-						<td>: <a href="<?= base_url('kegiatan/admin/download/'.$kegiatan->kegiatan_file)?>" class="btn btn-flat btn-xs btn-primary">Download</td>
+						<td>: <a href="<?= base_url($global->url.'download/'.$kegiatan->kegiatan_file)?>" class="btn btn-flat btn-xs btn-primary">Download</td>
 					</tr>				
 				</table>
 			</div>
