@@ -7,7 +7,7 @@
 		}
 
 		function index(){
-			redirect(site_url('frontend/home'));
+			redirect(site_url('bukutamu'));
 		}	
 	
 	}

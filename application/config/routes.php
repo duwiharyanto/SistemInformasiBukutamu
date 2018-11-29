@@ -51,5 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'route';
 $route['home'] = 'frontend/home';
+$route['bukutamu'] = 'frontend/bukutamu';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

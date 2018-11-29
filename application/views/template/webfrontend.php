@@ -80,7 +80,7 @@
           <?php echo ucwords($global->headline)?>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="<?= site_url()?>"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active"><a href="<?= site_url($global->url)?>"><?= ucwords($global->headline)?></a></li>
         </ol>
       </section>
