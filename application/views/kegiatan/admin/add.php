@@ -11,7 +11,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Tanggal</label>
-								<input type="text" readonly name="kegiatan_date" class="form-control" value="<?= date('d-m-Y')?>">
+								<input type="text" required name="kegiatan_date" class="datepicker form-control" >
 							</div>							
 							<div class="form-group">
 								<label>Kegiatan</label>

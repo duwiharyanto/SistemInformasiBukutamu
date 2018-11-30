@@ -46,7 +46,7 @@ class Master extends CI_Controller {
 		$level2=str_replace('.', '', $level1);
 		return $level2;
 	}
-	protected function viewdata($data){
+	protected function dumpdata($data){
 		echo "<pre>";
 		print_r($data);
 	}
@@ -105,5 +105,37 @@ class Master extends CI_Controller {
 			}
 		}
 		return $menu_akhir;		
-	}		
+	}	
+	protected function prosescetak($data){
+		$nama_dokumen=$data['judul']; //Beri nama file PDF hasil.
+		require_once('./asset/mPDF/mpdf.php');
+		$mpdf= new mPDF('c','A4-Pa','',0,20,20,20,20);	
+		// $mpdf->SetHTMLHeader('
+		// <div style="text-align: left; font-weight: bold;">
+		//     <img src="./asset/dist/img/avatar6.png" width="60px" height="60px">'.$nama_dokumen.'
+		// </div>');
+		$mpdf->SetHTMLFooter('
+		<table width="100%">
+		    <tr>
+		        <td width="33%">{DATE j-m-Y}</td>
+		        <td width="33%" align="center">{PAGENO}/{nbpg}</td>
+		        <td width="33%" style="text-align: right;">'.$nama_dokumen.'</td>
+		    </tr>
+		</table>');		
+		$mpdf->WriteHTML($data['view']);
+		$mpdf->Output($nama_dokumen.".pdf",'I');		
+	}
+	protected function barcode($param){
+		include "./asset/phpqrcode/qrlib.php"; 
+		$tempdir = "./barcode/";
+		#parameter inputan
+		$isi_teks = $param;
+		$namafile = $param.'.png';
+		$quality = 'H'; //ada 4 pilihan, L (Low), M(Medium), Q(Good), H(High)
+		$ukuran = 5; //batasan 1 paling kecil, 10 paling besar
+		$padding = 0;
+		QRCode::png($isi_teks,$tempdir.$namafile,$quality,$ukuran,$padding);
+		$path="barcode/".$namafile;
+		return base_url($path);		
+	}			
 }

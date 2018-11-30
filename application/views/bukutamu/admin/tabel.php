@@ -33,10 +33,15 @@
 			<button onclick="isibukutamu(<?= $kegiatan->kegiatan_id?>);" id="add" url="<?= base_url($global->url.'add.html')?>" class="btn btn-flat btn-block btn-primary"><span class="fa fa-plus"></span> Isi Bukutamu</button>
 		</div>			
 	</div>	
+	<div class="col-sm-2">
+		<div class="form-group">
+			<a href="<?= base_url($global->url.'cetakbukutamu/'.md5($kegiatan->kegiatan_id))?>" class="btn btn-flat btn-block btn-warning"><span class="fa fa-print"></span> Cetak</a>
+		</div>			
+	</div>		
 </div>
 <div class="row">
 	<div class="col-sm-12">
-		<div class="box box-primary">
+		<div class="box box-primary  animated bounceInDown">
 		        <div class="box-header">
 		          <h3 class="box-title">Tabel <?php echo ucwords($global->headline)?></h3>
 		        </div>

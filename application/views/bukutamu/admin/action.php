@@ -12,6 +12,27 @@
     });
     $(".selectdata").select2();             
   })
+  function notif(data){
+    if(data.success){
+      $.notify({
+        title: '<strong class="fa fa-check"></strong>',
+        message: data.success,
+        },{
+        type: 'success'
+      });         
+    }else{
+      $.notify({
+        title: '<strong class="fa fa-warning"></strong>',
+        message: data.error,
+        },{
+        type: 'danger'
+      });         
+    }    
+  }  
+  function loaddata(){
+    var url='<?= base_url($global->url."tabel")?>';
+    $("#view").load(url);     
+  }  
   function add(){
     var url=$("#add").attr('url');   
     $("#view").load(url);      
@@ -77,21 +98,7 @@
         cache:false,
         mimeType:'multipart/form-data',
         success:function(data){
-          if(data.success){
-            $.notify({
-              title: '<strong class="fa fa-check"></strong>',
-              message: data.success,
-              },{
-              type: 'success'
-            });         
-          }else{
-            $.notify({
-              title: '<strong class="fa fa-warning"></strong>',
-              message: data.error,
-              },{
-              type: 'danger'
-            });         
-          }
+          notif(data);
           loaddata();
           console.log(data.success);
         },
@@ -108,10 +115,6 @@
     }   
     });    
   } 
-  function loaddata(){
-    var url='<?= base_url($global->url."tabel")?>';
-    $("#view").load(url);     
-  }
   function hapus(){
     $('.hapus').click(function(){
       var url=$(this).attr('url');
@@ -131,21 +134,7 @@
           dataType:'json',
           data:{id:id},
           success:function(data){
-            if(data.success){
-              $.notify({
-                title: '<strong class="fa fa-check"></strong>',
-                message: data.success,
-                },{
-                type: 'success'
-              });         
-            }else{
-              $.notify({
-                title: '<strong class="fa fa-warning"></strong>',
-                message: data.error,
-                },{
-                type: 'danger'
-              });         
-            }
+            notif(data);
             loaddata();
             console.log(data.success);
           }
@@ -154,4 +143,5 @@
       return false
     })     
   }
+
 </script>

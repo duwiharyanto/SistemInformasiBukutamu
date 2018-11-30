@@ -36,7 +36,7 @@ include APPPATH.'controllers/Master.php';
 				);
 				$this->session->set_userdata($dt_session);				
 				if($this->session->userdata('user_level')==1){
-				  redirect(site_url("dashboard/admin"));
+				  redirect(site_url("kegiatan/admin"));
 				 //echo "login";
 				}else{
 				  redirect(site_url("dashboard/user"));	

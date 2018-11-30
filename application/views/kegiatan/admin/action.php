@@ -12,6 +12,23 @@
     });
     $(".selectdata").select2();             
   })
+  function notif(data){
+    if(data.success){
+      $.notify({
+        title: '<strong class="fa fa-check"></strong>',
+        message: data.success,
+        },{
+        type: 'success'
+      });         
+    }else{
+      $.notify({
+        title: '<strong class="fa fa-warning"></strong>',
+        message: data.error,
+        },{
+        type: 'danger'
+      });         
+    }    
+  }   
   function add(){
     var url=$("#add").attr('url');   
     $("#view").load(url);      
@@ -41,21 +58,7 @@
       encode:true,
       dataType:'json',
       success:function(data){
-        if(data.success){
-          $.notify({
-            title: '<strong class="fa fa-check"></strong>',
-            message: data.success,
-            },{
-            type: 'success'
-          });         
-        }else{
-          $.notify({
-            title: '<strong class="fa fa-warning"></strong>',
-            message: data.error,
-            },{
-            type: 'danger'
-          });         
-        }
+        notif(data);
         loaddata();
         console.log(data);
       }
@@ -96,21 +99,7 @@
         cache:false,
         mimeType:'multipart/form-data',
         success:function(data){
-          if(data.success){
-            $.notify({
-              title: '<strong class="fa fa-check"></strong>',
-              message: data.success,
-              },{
-              type: 'success'
-            });         
-          }else{
-            $.notify({
-              title: '<strong class="fa fa-warning"></strong>',
-              message: data.error,
-              },{
-              type: 'danger'
-            });         
-          }
+          notif(data);
           loaddata();
           console.log(data.success);
         },
@@ -150,21 +139,7 @@
           dataType:'json',
           data:{id:id},
           success:function(data){
-            if(data.success){
-              $.notify({
-                title: '<strong class="fa fa-check"></strong>',
-                message: data.success,
-                },{
-                type: 'success'
-              });         
-            }else{
-              $.notify({
-                title: '<strong class="fa fa-warning"></strong>',
-                message: data.error,
-                },{
-                type: 'danger'
-              });         
-            }
+            notif(data);
             loaddata();
             console.log(data);
           }

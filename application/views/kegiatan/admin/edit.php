@@ -15,7 +15,7 @@
 							</div>						
 							<div class="form-group">
 								<label>Tanggal</label>
-								<input type="text" readonly name="kegiatan_date" class="form-control" value="<?= date('d-m-Y',strtotime($data->kegiatan_date))?>">
+								<input type="text" name="kegiatan_date" class="form-control datepicker" value="<?= date('d-m-Y',strtotime($data->kegiatan_date))?>">
 							</div>							
 							<div class="form-group">
 								<label>Kegiatan</label>

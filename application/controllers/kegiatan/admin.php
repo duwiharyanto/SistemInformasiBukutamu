@@ -45,7 +45,10 @@ class admin extends Master {
 			'where'=>array(array($this->id=>$id)),
 		);
 		$file=$this->Crud->read($query)->row();
-		unlink($this->path.$file->kegiatan_file);
+		if($file->kegiatan_file){
+			unlink($this->path.$file->kegiatan_file);
+		}
+		return $file->kegiatan_aktif;
 	}
 	public function index()
 	{
@@ -70,8 +73,6 @@ class admin extends Master {
 					$data['kegiatan_file']=$file;
 					//print_r($data);
 				}else{
-					//$this->session->set_flashdata('error',$this->upload->display_errors());
-					//redirect(site_url($this->default_url));
 					$dt['error']=$this->upload->display_errors();
 					return $this->output->set_output(json_encode($dt));
 					exit();
@@ -185,17 +186,21 @@ class admin extends Master {
 	}	
 	public function hapus(){
 		$id=$this->input->post('id');
-		$this->hapus_file($id);
+		$kegiatan=$this->hapus_file($id);
 		$query=array(
 			'tabel'=>$this->master_tabel,
 			'where'=>array($this->id=>$id),
 		);
-		$delete=$this->Crud->delete($query);
-		if($delete){
-			$dt['success']='hapus data berhasil';
+		if(!$kegiatan==1){
+			$delete=$this->Crud->delete($query);
+			if($delete){
+				$dt['success']='hapus data berhasil';
+			}else{
+				$dt['error']='input data error';
+				$dt['msg']=$delete;
+			}
 		}else{
-			$dt['error']='input data error';
-			$dt['msg']=$delete;
+			$dt['error']='hapus gagal, data masih aktif';
 		}
 		return $this->output->set_output(json_encode($dt));	
 	}

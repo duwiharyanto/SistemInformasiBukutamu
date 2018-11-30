@@ -15,8 +15,8 @@ class admin extends Master {
 	//VARIABEL
 	private $master_tabel="kegiatan"; //Mendefinisikan Nama Tabel
 	private $id="kegiatan_id";	//Menedefinisaikan Nama Id Tabel
-	private $default_url="frontend/kegiatan/"; //Mendefinisikan url controller
-	private $default_view="frontend/kegiatan/"; //Mendefinisiakn defaul view
+	private $default_url="kegiatan/admin/"; //Mendefinisikan url controller
+	private $default_view="kegiatan/admin/"; //Mendefinisiakn defaul view
 	private $view="template/backend"; //Mendefinisikan Tamplate Root
 	private $path='./upload/';
 
@@ -27,12 +27,13 @@ class admin extends Master {
 			'headline'=>$data['headline'], //Deskripsi Menu
 			'url'=>$data['url'], //Deskripsi URL yang dilewatkan dari function
 			'ikon'=>"fa fa-tasks",
-			'view'=>"views/frontend/kegiatan/index.php",
+			'view'=>"views/kegiatan/admin/index.php",
 			'detail'=>false,
 			'cetak'=>false,
 			'edit'=>true,
 			'delete'=>true,
-			'download'=>false,
+			'download'=>true,
+			'aktifasi'=>true,
 		);
 		return (object)$data; //MEMBUAT ARRAY DALAM BENTUK OBYEK
 		//$data->menu=kegiatan, bentuk obyek
@@ -44,7 +45,9 @@ class admin extends Master {
 			'where'=>array(array($this->id=>$id)),
 		);
 		$file=$this->Crud->read($query)->row();
-		unlink($this->path.$file->kegiatan_file);
+		if($file->kegiatan_file){
+			unlink($this->path.$file->kegiatan_file);
+		}
 	}
 	public function index()
 	{
@@ -60,6 +63,7 @@ class admin extends Master {
 				'kegiatan_nama'=>$this->input->post('kegiatan_nama'),
 				'kegiatan_date'=>date('Y-m-d',strtotime($this->input->post('kegiatan_date'))),
 				'kegiatan_keterangan'=>$this->input->post('kegiatan_keterangan'),
+				'kegiatan_aktif'=>0,
 			);
 			$file='fileupload';
 			if($_FILES[$file]['name']){
@@ -126,6 +130,7 @@ class admin extends Master {
 				'kegiatan_nama'=>$this->input->post('kegiatan_nama'),
 				'kegiatan_date'=>date('Y-m-d',strtotime($this->input->post('kegiatan_date'))),
 				'kegiatan_keterangan'=>$this->input->post('kegiatan_keterangan'),
+				//'kegiatan_aktif'=>$this->input->post('kegiatan_aktif'),
 			);
 			$file='fileupload';
 			if($_FILES[$file]['name']){
@@ -195,6 +200,43 @@ class admin extends Master {
 			$dt['msg']=$delete;
 		}
 		return $this->output->set_output(json_encode($dt));	
+	}
+	public function download($file=null){
+		if($file){
+			$this->downloadfile($this->path,$file);
+		}else{
+			$this->session->set_flashdata('error','File tidak ditemukan');
+			redirect(site_url($this->default_url));
+		}
+	}
+	public function aktifasi(){
+		############### ALL SET 0
+		$prepare=array(
+			'kegiatan_aktif'=>0,
+		);
+		$qprepare=array(
+			'tabel'=>$this->master_tabel,
+			'data'=>$prepare,
+		);
+		$prepare=$this->Crud->update($qprepare);
+		############### SET KE AKTIF
+		$id=$this->input->post('id');
+		$data=array(
+			'kegiatan_aktif'=>1,
+		);
+		$query=array(
+			'tabel'=>$this->master_tabel,
+			'data'=>$data,
+			'where'=>array($this->id=>$id),
+		);
+		$update=$this->Crud->update($query);
+		if($update){
+			$dt['success']='Aktifasi sukses';
+		}else{
+			$dt['error']='Aktifasi gagal';
+		}
+		return $this->output->set_output(json_encode($dt));
+
 	}
 
 }

@@ -215,5 +215,33 @@ class admin extends Master {
 			redirect(site_url($this->default_url));
 		}
 	}
+	public function cetakbukutamu($id){
+		$query=array(
+			'select'=>'b.*',
+			'tabel'=>'kegiatan a',
+			'join'=>array(array('tabel'=>'bukutamu b', 'ON'=>'b.bukutamu_idkegiatan=a.kegiatan_id','jenis'=>'INNER')),
+			'where'=>array(array('md5(a.kegiatan_id)'=>$id)),
+		);
+		$bukutamu=$this->Crud->join($query)->result();
+		$kegiatan=array(
+			'tabel'=>'kegiatan',
+			'where'=>array(array('md5(kegiatan_id)'=>$id)),
+		);
+		$kegiatan=$this->Crud->read($kegiatan)->row();
+		$param='akprind1574-'.$kegiatan->kegiatan_id;
+		$qrcode=$this->barcode($param);
+		$data=array(
+			'data'=>$bukutamu,
+			'kegiatan'=>$kegiatan,
+			'qrcode'=>$qrcode,
+			);
+		$view=$this->load->view('laporan/bukutamu',$data,true);
+		$pdf=array(
+			'judul'=>$kegiatan->kegiatan_nama,
+			'view'=>$view,
+		);
+		$this->prosescetak($pdf);		
+		//$this->dumpdata($qrcode);
+	}
 
 }
