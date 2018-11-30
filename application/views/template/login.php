@@ -59,13 +59,13 @@
         </div>    
       </div>
       <div style="color:white;" class="col-sm-6 hidden-xs">
-        <h1>Alumni IST AKPRIND</h1>
+        <h1><i class="fa fa-book"></i> Buku Tamu</h1>
         <p style="font-size:16px">
             Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. 
             Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, 
             quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. 
         </p>
-        <p style="color:white;font-size:16px"><b>Email : </b><a style="color:white" href="mailto:baka@akprind.com" >baka@akprind.com</a><br>
+        <p style="color:white;font-size:16px"><b>Email : </b><a style="color:white" href="haryanto.duwi@gmail.com" >haryanto.duwi@gmail.com</a><br>
         <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
         </p>
       </div>
